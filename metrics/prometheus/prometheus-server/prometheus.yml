@@ -1,0 +1,25 @@
+# my global config
+global:
+  scrape_interval: 15s # By default, scrape targets every 15 seconds.
+  evaluation_interval: 15s # By default, scrape targets every 15 seconds.
+  # scrape_timeout is set to the global default (10s).
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+    cluster: 'cluster01'
+    replica: 'r1'
+
+scrape_configs:
+  # Services monitoring
+  - job_name: 'spring.petclinic.microservices'
+    scrape_interval: 15s
+    static_configs:
+      - targets:
+        - 'customers-service:7091'
+        - 'visits-service:7092'
+        - 'vets-service:7093'
+        - 'api-gateway:7094'
+        - 'discovery-server:7095'
+        - 'config-server:7096'
+        - 'admin-server:7097'
