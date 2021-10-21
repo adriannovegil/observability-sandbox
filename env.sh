@@ -1,0 +1,12 @@
+#!/bin/bash
+
+DOCKER_COMPOSE_FILE_NAME="docker-compose.yml"
+
+GRAFANA_FOLDER="grafana"
+
+# Dashboarding
+DASBOARDING_FOLDER="dashboarding"
+
+export GRAFANA="$DASBOARDING_FOLDER/$GRAFANA_FOLDER/$DOCKER_COMPOSE_FILE_NAME"
+
+export ALL_COMPOSE_FILES=" -f "$GRAFANA

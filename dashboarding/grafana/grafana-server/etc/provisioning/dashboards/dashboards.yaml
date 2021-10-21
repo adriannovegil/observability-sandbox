@@ -1,0 +1,15 @@
+apiVersion: 1
+
+providers:
+  # Spring Petclinic Application Dashboards
+  - name: 'Spring Petclinic'
+    orgId: 1
+    folder: 'Petclinic'
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/petclinic

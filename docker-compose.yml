@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+
+volumes:
+  agent-vol:
+
+networks:
+  observabilitysandbox:
+    name: observabilitysandbox
+    external: true

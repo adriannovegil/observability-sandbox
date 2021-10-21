@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  # Grafana
+  grafana-server:
+    image: grafana/grafana:8.1.2
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+    volumes:
+      - ./grafana-server/etc:/etc/grafana:ro
+      - ./grafana-server/dashboards:/var/lib/grafana/dashboards
+      - grafana-lib:/var/lib/grafana
+      - grafana-log:/var/log/grafana
+    ports:
+      - 3000:3000
+    networks:
+      - observabilitysandbox
+    labels:
+      org.label-schema.group: "observability"
+
+volumes:
+  grafana-lib:
+    external: false
+  grafana-log:
+    external: false
+
+networks:
+  observabilitysandbox:
+    name: observabilitysandbox
+    external: true

@@ -45,29 +45,34 @@ endif
 .PHONY: help build up start stop restart logs status ps down clean
 
 build: ## Build the Docker images
-	@$(COMPOSE_COMMAND) build
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) $${ALL_COMPOSE_FILES} build
 
 up: create-network ## Start all or c=<name> containers in foreground
-	@$(COMPOSE_COMMAND) up
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) -f $${GRAFANA} up -d; \
 
 start: create-network ## Start all or c=<name> containers in background
 	@$(COMPOSE_COMMAND) up -d
 
 stop: ## Stop all or c=<name> containers
-	@$(COMPOSE_COMMAND) stop
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) $${ALL_COMPOSE_FILES} stop
 
 restart: stop start ## Restart all or c=<name> containers
 
 logs: ## Show logs for all or c=<name> containers
-	@$(COMPOSE_COMMAND) logs --tail=100
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) $${ALL_COMPOSE_FILES} logs --tail=100
 
 status: ## Show status of containers
-	@$(COMPOSE_COMMAND) ps
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) $${ALL_COMPOSE_FILES} ps
 
 ps: status ## Alias of status
 
 down: confirm ## Clean all data
-	@$(COMPOSE_COMMAND) down
-	@docker network rm ${DOCKER_NETWORK} | true
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) $${ALL_COMPOSE_FILES} down
 
 clean: down ## Alias of down
