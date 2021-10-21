@@ -51,7 +51,8 @@ build: ## Build the Docker images
 up: create-network ## Start all or c=<name> containers in foreground
 	. ./env.sh; \
 	$(COMPOSE_COMMAND) -f $${GRAFANA} up -d; \
-	$(COMPOSE_COMMAND) -f $${PROMETHEUS} up -d
+	$(COMPOSE_COMMAND) -f $${PROMETHEUS} up -d; \
+	$(COMPOSE_COMMAND) -f $${SELF_METRICS} up -d
 
 start: create-network ## Start all or c=<name> containers in background
 	@$(COMPOSE_COMMAND) up -d

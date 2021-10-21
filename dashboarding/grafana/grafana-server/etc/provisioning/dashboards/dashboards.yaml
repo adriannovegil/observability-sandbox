@@ -1,6 +1,29 @@
 apiVersion: 1
 
 providers:
+  # Self Monitoring
+  - name: 'Docker Metrics'
+    orgId: 1
+    folder: 'Self Monitoring'
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    updateIntervalSeconds: 10 #how often Grafana will scan for changed dashboards
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/docker-metrics
+  - name: 'Prometheus'
+    orgId: 1
+    folder: 'Self Monitoring'
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/prometheus
   # Spring Petclinic Application Dashboards
   - name: 'Spring Petclinic'
     orgId: 1
