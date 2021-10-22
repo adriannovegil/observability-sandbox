@@ -31,16 +31,24 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ['cadvisor:8080']
-      
-  # Services monitoring
-  - job_name: 'spring.petclinic.microservices'
-    scrape_interval: 15s
+
+  # Spring petclinic services monitoring
+  - job_name: api-gateway
+    metrics_path: /actuator/prometheus
     static_configs:
-      - targets:
-        - 'customers-service:7091'
-        - 'visits-service:7092'
-        - 'vets-service:7093'
-        - 'api-gateway:7094'
-        - 'discovery-server:7095'
-        - 'config-server:7096'
-        - 'admin-server:7097'
+    - targets: ['api-gateway:8080']
+
+  - job_name: customers-service
+    metrics_path: /actuator/prometheus
+    static_configs:
+    - targets: ['customers-service:8081']
+
+  - job_name: visits-service
+    metrics_path: /actuator/prometheus
+    static_configs:
+    - targets: ['visits-service:8082']
+
+  - job_name: vets-service
+    metrics_path: /actuator/prometheus
+    static_configs:
+    - targets: ['vets-service:8083']
