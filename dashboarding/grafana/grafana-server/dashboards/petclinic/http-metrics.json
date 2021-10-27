@@ -22,8 +22,8 @@
   "editable": true,
   "gnetId": 14430,
   "graphTooltip": 0,
-  "id": 10,
-  "iteration": 1635172976016,
+  "id": 8,
+  "iteration": 1635341971496,
   "links": [],
   "panels": [
     {
@@ -852,9 +852,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(http_server_requests_seconds_count{application=\"$application\", instance=~\"$instance\", uri=~\"$uri\"}[15s]) ",
+          "exemplar": true,
+          "expr": "increase(http_server_requests_seconds_count{application=\"$application\", instance=~\"$instance\", uri=~\"$uri\"}[1m])",
           "format": "time_series",
           "instant": false,
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{status}}",
           "refId": "A"
@@ -880,6 +882,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:173",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -888,6 +891,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:174",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -944,10 +948,13 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(10, sum by(uri, method) (rate(http_server_requests_seconds_count{application=\"$application\", instance=~\"$instance\", uri=~\"$uri\"}[1m])))",
+          "exemplar": true,
+          "expr": "topk(10, sum by(uri, method) (rate(http_server_requests_seconds_count{application=\"$application\", instance=~\"$instance\", uri!~\".*actuator.*\"}[1m])))",
           "format": "time_series",
           "instant": false,
+          "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -955,7 +962,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Top 10 Most Used API endpoints",
+      "title": "Top 10 Most Used Endpoints",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -971,6 +978,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:409",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -979,6 +987,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:410",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1039,10 +1048,13 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(10, sum by(uri, method) (rate(http_server_requests_seconds_max{application=\"$application\", instance=~\"$instance\", uri=~\"$uri\"}[1m])))",
+          "exemplar": true,
+          "expr": "topk(10, sum by(uri, method) (rate(http_server_requests_seconds_max{application=\"$application\", instance=~\"$instance\", uri!~\".*actuator.*\"}[1m])))",
           "format": "time_series",
           "instant": false,
+          "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -1050,7 +1062,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Top 10 Slowest API endpoints",
+      "title": "Top 10 Slowest Endpoints",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1066,6 +1078,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:252",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1074,6 +1087,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:253",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1102,14 +1116,15 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 6,
-        "w": 8,
+        "h": 8,
+        "w": 12,
         "x": 0,
         "y": 31
       },
       "hiddenSeries": false,
       "id": 66,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
         "current": false,
         "max": false,
@@ -1137,7 +1152,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "http_server_requests_seconds_count{instance=\"$instance\", application=\"$application\"}",
+          "expr": "http_server_requests_seconds_count{instance=\"$instance\", application=\"$application\", uri!~\".*actuator.*\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1203,14 +1218,15 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 8,
+        "h": 8,
+        "w": 12,
+        "x": 12,
         "y": 31
       },
       "hiddenSeries": false,
       "id": 110,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
         "current": false,
         "max": false,
@@ -1237,7 +1253,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "http_server_requests_seconds_sum{instance=\"$instance\", application=\"$application\"}",
+          "exemplar": true,
+          "expr": "http_server_requests_seconds_sum{instance=\"$instance\", application=\"$application\", uri!~\".*actuator.*\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1265,6 +1282,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:1540",
           "format": "locale",
           "label": null,
           "logBase": 1,
@@ -1273,6 +1291,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:1541",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1301,14 +1320,15 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 16,
-        "y": 31
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 39
       },
       "hiddenSeries": false,
       "id": 111,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
         "current": false,
         "max": false,
@@ -1335,7 +1355,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "http_server_requests_seconds_max{instance=\"$instance\", application=\"$application\"}",
+          "exemplar": true,
+          "expr": "http_server_requests_seconds_max{instance=\"$instance\", application=\"$application\", uri!~\".*actuator.*\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1363,6 +1384,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:1623",
           "format": "locale",
           "label": null,
           "logBase": 1,
@@ -1371,6 +1393,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:1624",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1399,111 +1422,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 37
-      },
-      "hiddenSeries": false,
-      "id": 4,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.1.2",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "irate(http_server_requests_seconds_count{instance=\"$instance\", application=\"$application\", uri!~\".*actuator.*\"}[5m])",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{method}} [{{status}}] - {{uri}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Request Count",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 44
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 39
       },
       "hiddenSeries": false,
       "id": 2,
@@ -1513,7 +1435,7 @@
         "current": false,
         "max": true,
         "min": true,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "total": false,
         "values": true
@@ -1536,8 +1458,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "exemplar": true,
           "expr": "irate(http_server_requests_seconds_sum{instance=\"$instance\", application=\"$application\", exception=\"None\", uri!~\".*actuator.*\"}[5m]) / irate(http_server_requests_seconds_count{instance=\"$instance\", application=\"$application\", exception=\"None\", uri!~\".*actuator.*\"}[5m])",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{method}} [{{status}}] - {{uri}}",
           "refId": "A"
@@ -1563,6 +1487,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:1208",
           "format": "s",
           "label": "",
           "logBase": 1,
@@ -1571,6 +1496,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:1209",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1591,7 +1517,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 51
+        "y": 47
       },
       "id": 123,
       "panels": [],
@@ -1610,7 +1536,7 @@
         "h": 9,
         "w": 21,
         "x": 0,
-        "y": 52
+        "y": 48
       },
       "hiddenSeries": false,
       "id": 125,
@@ -1641,9 +1567,12 @@
       "steppedLine": false,
       "targets": [
         {
+          "exemplar": true,
           "expr": "sum(rate(http_client_requests_seconds_sum{application=\"$application\", instance=~\"$instance\", uri=~\"$uri\"}[1m])) / sum(rate(http_client_requests_seconds_count{application=\"$application\", instance=~\"$instance\", uri=~\"$uri\"}[1m]))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -1667,6 +1596,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:93",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1675,6 +1605,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:94",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1728,7 +1659,7 @@
         "h": 9,
         "w": 3,
         "x": 21,
-        "y": 52
+        "y": 48
       },
       "id": 127,
       "interval": null,
@@ -1774,7 +1705,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "api-gateway",
           "value": "api-gateway"
         },
@@ -1891,5 +1822,5 @@
   "timezone": "",
   "title": "HTTP Metrics (Micrometer)",
   "uid": "nDQg_jOnk2",
-  "version": 10
+  "version": 1
 }

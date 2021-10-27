@@ -18,15 +18,15 @@
       }
     ]
   },
+  "description": "Containers metrics",
   "editable": true,
   "gnetId": null,
-  "graphTooltip": 0,
-  "id": 7,
-  "iteration": 1635174370131,
+  "graphTooltip": 1,
+  "id": 3,
+  "iteration": 1635340388509,
   "links": [],
   "panels": [
     {
-      "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
@@ -34,521 +34,9 @@
         "x": 0,
         "y": 0
       },
-      "id": 17,
-      "panels": [],
-      "title": "CPU Metrics",
+      "id": 21,
+      "title": "CPU Use",
       "type": "row"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 1,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#299c46",
-                "value": null
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 0.9
-              },
-              {
-                "color": "#bf1b00",
-                "value": 0.95
-              }
-            ]
-          },
-          "unit": "percentunit"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 0,
-        "y": 1
-      },
-      "id": 5,
-      "interval": null,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "8.1.2",
-      "repeatDirection": "h",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "system_cpu_usage{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "measurement": "system_cpu_usage",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "from(bucket: \"telegraf\")\n|> range(start: -1m)\n|> filter(fn: (r) =>\n  r._measurement == \"system_cpu_usage\" AND\n  r.host == \"$host\" AND\n  r._field == \"gauge\")\n|> keep(columns: [\"_value\", \"_time\"])",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "gauge"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "CPU Usage",
-      "type": "gauge"
-    },
-    {
-      "aliasColors": {
-        "CPU Utilization": "#82b5d8",
-        "Load Average": "#bf1b00"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 10,
-        "x": 3,
-        "y": 1
-      },
-      "hiddenSeries": false,
-      "id": 11,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.1.2",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "Load Average",
-          "fill": 0,
-          "linewidth": 3,
-          "yaxis": 2
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "CPU Utilization",
-          "exemplar": true,
-          "expr": "system_cpu_usage{instance=\"$instance\", application=\"$application\"}",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "15s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "System CPU Usage",
-          "measurement": "system_cpu_usage",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "from(bucket: \"telegraf\")\n|> range($range)\n|> filter(fn: (r) =>\n  r._measurement == \"system_cpu_usage\" AND\n  r.service == \"$service\" AND\n  r._field == \"gauge\")\n|> keep(columns: [\"_value\", \"_time\"])",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "gauge"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "host",
-              "operator": "=~",
-              "value": "/^$host$/"
-            }
-          ]
-        },
-        {
-          "alias": "Load Average",
-          "exemplar": true,
-          "expr": "process_cpu_usage{instance=\"$instance\", application=\"$application\"}",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "15s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Process CPU Usage",
-          "measurement": "system_load_average_1m",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "gauge"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "host",
-              "operator": "=~",
-              "value": "/^$host$/"
-            }
-          ]
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "CPU Usage",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:139",
-          "decimals": null,
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": "1.05",
-          "min": "0",
-          "show": true
-        },
-        {
-          "$$hashKey": "object:140",
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "CPU Utilization": "#82b5d8",
-        "Load Average": "#bf1b00"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 11,
-        "x": 13,
-        "y": 1
-      },
-      "hiddenSeries": false,
-      "id": 18,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "8.1.2",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "Load Average",
-          "fill": 0,
-          "linewidth": 3,
-          "yaxis": 2
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "CPU Utilization",
-          "exemplar": true,
-          "expr": "system_load_average_1m{instance=\"$instance\", application=\"$application\"}",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "15s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Load Average [1m]",
-          "measurement": "system_cpu_usage",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "from(bucket: \"telegraf\")\n|> range($range)\n|> filter(fn: (r) =>\n  r._measurement == \"system_cpu_usage\" AND\n  r.service == \"$service\" AND\n  r._field == \"gauge\")\n|> keep(columns: [\"_value\", \"_time\"])",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "gauge"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "host",
-              "operator": "=~",
-              "value": "/^$host$/"
-            }
-          ]
-        },
-        {
-          "alias": "Load Average",
-          "exemplar": true,
-          "expr": "system_cpu_count{instance=\"$instance\", application=\"$application\"}",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "15s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "CPU Core Size",
-          "measurement": "system_load_average_1m",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "gauge"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "host",
-              "operator": "=~",
-              "value": "/^$host$/"
-            }
-          ]
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Load Average",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:139",
-          "decimals": null,
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:140",
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
     },
     {
       "cacheTimeout": null,
@@ -587,12 +75,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 2,
-        "w": 3,
+        "h": 4,
+        "w": 4,
         "x": 0,
-        "y": 5
+        "y": 1
       },
-      "id": 9,
+      "id": 7,
       "interval": null,
       "links": [],
       "maxDataPoints": 100,
@@ -614,72 +102,395 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "system_cpu_count{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "instant": true,
+          "expr": "machine_cpu_cores",
           "interval": "",
-          "intervalFactor": 1,
+          "intervalFactor": 2,
           "legendFormat": "",
-          "measurement": "system_cpu_count",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "from(bucket: \"telegraf\")\n|> range(start: -1m)\n|> filter(fn: (r) =>\n  r._measurement == \"system_cpu_count\" AND\n  r.host == \"$host\" AND\n  r._field == \"gauge\")\n|> keep(columns: [\"_value\", \"_time\"])\n|> last()",
+          "metric": "machine_cpu_cores",
           "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "gauge"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "service",
-              "operator": "=~",
-              "value": "/^$service$/"
-            }
-          ]
+          "step": 20
         }
       ],
-      "title": "# CPUs",
+      "title": "CPU Cores",
       "type": "stat"
     },
     {
-      "collapsed": false,
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "decimals": 2,
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 8,
+        "w": 20,
+        "x": 4,
+        "y": 1
+      },
+      "hiddenSeries": false,
+      "id": 8,
+      "isNew": true,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.1.2",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum by (name) (rate(container_cpu_usage_seconds_total{name=~\"$application\", image!=\"\"}[1m])) / scalar(count(node_cpu_seconds_total{mode=\"user\"})) * 100",
+          "interval": "",
+          "intervalFactor": 10,
+          "legendFormat": "{{ name }}",
+          "metric": "container_cpu_user_seconds_total",
+          "refId": "A",
+          "step": 10
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Container CPU Usage",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 2,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:117",
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:118",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 65
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 5
+      },
+      "hideTimeOverride": true,
+      "id": 4,
+      "interval": null,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "expr": "sum(rate(container_cpu_user_seconds_total{image!=\"\"}[1m])) / count(node_cpu_seconds_total{mode=\"user\"}) * 100",
+          "interval": "10s",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A",
+          "step": 10
+        }
+      ],
+      "timeFrom": "10s",
+      "title": "CPU Load",
+      "type": "gauge"
+    },
+    {
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 9
       },
-      "id": 15,
-      "panels": [],
-      "title": "Disk Metrics",
+      "id": 19,
+      "title": "Memory Use",
       "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 10
+      },
+      "hideTimeOverride": true,
+      "id": 2,
+      "interval": null,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "expr": "sum(container_memory_usage_bytes{image!=\"\"})",
+          "interval": "10s",
+          "intervalFactor": 2,
+          "legendFormat": "",
+          "refId": "A",
+          "step": 20
+        }
+      ],
+      "timeFrom": "10s",
+      "title": "Used Memory",
+      "type": "stat"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "decimals": 2,
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 8,
+        "w": 20,
+        "x": 4,
+        "y": 10
+      },
+      "hiddenSeries": false,
+      "id": 11,
+      "isNew": true,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.1.2",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum by (name)(container_memory_usage_bytes{name=~\"$application\", image!=\"\"})",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{ name }}",
+          "metric": "container_memory_usage",
+          "refId": "A",
+          "step": 1
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Container Memory Usage",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "cacheTimeout": null,
@@ -700,36 +511,37 @@
               "type": "special"
             }
           ],
-          "max": 1,
+          "max": 100,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#299c46",
+                "color": "rgba(50, 172, 45, 0.97)",
                 "value": null
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
-                "value": 0.9
+                "value": 65
               },
               {
-                "color": "#d44a3a",
-                "value": 0.95
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
               }
             ]
           },
-          "unit": "percentunit"
+          "unit": "percent"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 8
+        "y": 14
       },
-      "id": 4,
+      "hideTimeOverride": true,
+      "id": 5,
       "interval": null,
       "links": [],
       "maxDataPoints": 100,
@@ -747,59 +559,56 @@
         "text": {}
       },
       "pluginVersion": "8.1.2",
-      "repeat": null,
-      "repeatDirection": "h",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "(disk_total{application=\"$application\", instance=\"$instance\"} - disk_free{application=\"$application\", instance=\"$instance\"})/disk_total{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
+          "expr": "(sum(node_memory_MemTotal_bytes) - sum(node_memory_MemFree_bytes+node_memory_Buffers_bytes+node_memory_Cached_bytes) ) / sum(node_memory_MemTotal_bytes) * 100",
+          "interval": "10s",
+          "intervalFactor": 2,
           "legendFormat": "",
-          "query": "usedPerc = () => {\ntotal = from(bucket: \"telegraf\")\n  |> range($range)\n  |> filter(fn: (r) =>\n    r._measurement == \"disk_total\" AND\n    r.host == \"$host\" AND\n    r._field == \"gauge\")\n  |> keep(columns: [\"_value\", \"_time\", \"service\"])\n  \nfree = from(bucket: \"telegraf\")\n  |> range($range)\n  |> filter(fn: (r) =>\n    r._measurement == \"disk_free\" AND\n    r.host == \"$host\" AND\n    r._field == \"gauge\")\n  |> keep(columns: [\"_value\", \"_time\", \"service\"])\n  \nreturn join(tables:{total:total, free:free},on:[\"_time\",\"_stop\",\"_start\"])\n    |> map(fn:(r) => ({\n        _time: r._time,\n        _value: (r._value_total - r._value_free)/r._value_total\n        \n    }))\n}\n\nusedPerc()",
-          "refId": "A"
+          "refId": "A",
+          "step": 20
         }
       ],
-      "title": "Disk Usage",
+      "timeFrom": "10s",
+      "title": "Memory Load",
       "type": "gauge"
     },
     {
-      "aliasColors": {
-        "disk_free": "#629e51",
-        "disk_free ": "#629e51",
-        "disk_free{host=\"4d8670ccd24b\",host-address=\"172.19.0.10\",instance=\"vets-service:9093\",job=\"inspectit\",service=\"vets-service\"}": "#629e51",
-        "disk_used": "#1f78c1",
-        "disk_used ": "#1f78c1"
-      },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "fill": 7,
+      "decimals": 2,
+      "editable": true,
+      "error": false,
+      "fill": 1,
       "fillGradient": 0,
+      "grid": {},
       "gridPos": {
-        "h": 6,
-        "w": 21,
-        "x": 3,
-        "y": 8
+        "h": 8,
+        "w": 20,
+        "x": 4,
+        "y": 18
       },
       "hiddenSeries": false,
-      "id": 13,
+      "id": 12,
+      "isNew": true,
       "legend": {
-        "avg": false,
+        "alignAsTable": true,
+        "avg": true,
         "current": false,
-        "max": false,
-        "min": false,
+        "max": true,
+        "min": true,
+        "rightSide": true,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
         "alertThreshold": true
       },
@@ -810,39 +619,30 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
           "exemplar": true,
-          "expr": "disk_total{application=\"$application\", instance=\"$instance\"} - disk_free{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
+          "expr": "sum by (name) (container_memory_cache{name=~\"$application\", image!=\"\"})",
           "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "disk_used",
-          "query": "usedPerc = () => {\ntotal = from(bucket: \"telegraf\")\n  |> range($range)\n  |> filter(fn: (r) =>\n    r._measurement == \"disk_total\" AND\n    r.host == \"$host\" AND\n    r._field == \"gauge\")\n  |> keep(columns: [\"_value\", \"_time\", \"_measurement\"])\n  \nfree = from(bucket: \"telegraf\")\n  |> range($range)\n  |> filter(fn: (r) =>\n    r._measurement == \"disk_free\" AND\n    r.host == \"$host\" AND\n    r._field == \"gauge\")\n  |> keep(columns: [\"_value\", \"_time\", \"_measurement\"])\n  \nreturn join(tables:{total:total, free:free},on:[\"_time\",\"_stop\",\"_start\"])\n    |> map(fn:(r) => ({\n        _time: r._time,\n        _value: (r._value_total - r._value_free),\n        _measurement: \"disk_used\"\n    }))\n}\n\nusedPerc()",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "disk_free{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "disk_free",
-          "query": "from(bucket: \"telegraf\")\n  |> range($range)\n  |> filter(fn: (r) =>\n    r._measurement == \"disk_free\" AND\n    r.host == \"$host\" AND\n    r._field == \"gauge\")\n  |> keep(columns: [\"_value\", \"_time\", \"_measurement\"])\n",
-          "refId": "B"
+          "intervalFactor": 2,
+          "legendFormat": "{{name}}",
+          "metric": "container_memory_cache",
+          "refId": "A",
+          "step": 2
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Disk Usage",
+      "title": "Container Cached Memory Usage",
       "tooltip": {
+        "msResolution": true,
         "shared": true,
         "sort": 0,
-        "value_type": "individual"
+        "value_type": "cumulative"
       },
       "type": "graph",
       "xaxis": {
@@ -854,8 +654,229 @@
       },
       "yaxes": [
         {
-          "decimals": null,
-          "format": "decbytes",
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 26
+      },
+      "id": 17,
+      "panels": [],
+      "title": "Storage Metrics",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 27
+      },
+      "hideTimeOverride": true,
+      "id": 3,
+      "interval": null,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "expr": "sum(container_fs_usage_bytes)",
+          "interval": "30s",
+          "intervalFactor": 2,
+          "refId": "A",
+          "step": 60
+        }
+      ],
+      "timeFrom": "10s",
+      "title": "Used Storage",
+      "type": "stat"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 8,
+        "w": 20,
+        "x": 4,
+        "y": 27
+      },
+      "hiddenSeries": false,
+      "id": 15,
+      "isNew": true,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": false,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.1.2",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "read",
+          "yaxis": 1
+        },
+        {
+          "alias": "written",
+          "yaxis": 1
+        },
+        {
+          "alias": "io time",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(irate(node_disk_read_bytes_total[5m]))",
+          "interval": "2s",
+          "intervalFactor": 4,
+          "legendFormat": "read",
+          "metric": "",
+          "refId": "A",
+          "step": 8
+        },
+        {
+          "expr": "sum(irate(node_disk_written_bytes_total[5m]))",
+          "interval": "2s",
+          "intervalFactor": 4,
+          "legendFormat": "written",
+          "metric": "",
+          "refId": "B",
+          "step": 8
+        },
+        {
+          "expr": "sum(irate(node_disk_io_time_seconds_total[5m]))",
+          "interval": "2s",
+          "intervalFactor": 4,
+          "legendFormat": "io time",
+          "metric": "",
+          "refId": "C",
+          "step": 8
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "I/O Usage",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -863,7 +884,7 @@
           "show": true
         },
         {
-          "format": "short",
+          "format": "ms",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -895,41 +916,41 @@
               "type": "special"
             }
           ],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#d44a3a",
+                "color": "rgba(50, 172, 45, 0.97)",
                 "value": null
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
-                "value": 500000
+                "value": 65
               },
               {
-                "color": "#299c46",
-                "value": 200000
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "percent"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 2,
-        "w": 3,
+        "h": 4,
+        "w": 4,
         "x": 0,
-        "y": 12
+        "y": 31
       },
-      "id": 12,
+      "hideTimeOverride": true,
+      "id": 6,
       "interval": null,
       "links": [],
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -938,64 +959,24 @@
           "fields": "",
           "values": false
         },
-        "text": {},
-        "textMode": "auto"
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
       },
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "exemplar": true,
-          "expr": "disk_free{application=\"$application\", instance=\"$instance\"}",
-          "format": "time_series",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "instant": true,
-          "interval": "",
+          "expr": "(node_filesystem_size_bytes{fstype=\"aufs\"} - node_filesystem_free_bytes{fstype=\"aufs\"}) / node_filesystem_size_bytes{fstype=\"aufs\"}  * 100",
+          "interval": "30s",
           "intervalFactor": 1,
           "legendFormat": "",
-          "measurement": "system_cpu_count",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "from(bucket: \"telegraf\")\n  |> range(start: -1m)\n  |> filter(fn: (r) =>\n    r._measurement == \"disk_free\" AND\n    r.host == \"$host\" AND\n    r._field == \"gauge\")\n  |> keep(columns: [\"_value\", \"_time\"])\n  |> last()",
           "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "gauge"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "service",
-              "operator": "=~",
-              "value": "/^$service$/"
-            }
-          ]
+          "step": 30
         }
       ],
-      "title": "Disk Free",
-      "type": "stat"
+      "timeFrom": "10s",
+      "title": "Storage Load",
+      "type": "gauge"
     },
     {
       "collapsed": false,
@@ -1004,33 +985,239 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 35
       },
-      "id": 7,
+      "id": 23,
       "panels": [],
-      "title": "Memory Metrics",
+      "title": "Network Metrics",
       "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "decimals": 2,
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "hiddenSeries": false,
+      "id": 13,
+      "isNew": true,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.1.2",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum by (name) (rate(container_network_receive_bytes_total{name=~\"$application\", image!=\"\"}[1m]))",
+          "interval": "",
+          "intervalFactor": 10,
+          "legendFormat": "{{ name }}",
+          "metric": "container_network_receive_bytes_total",
+          "refId": "A",
+          "step": 10
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Container Network Input",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 2,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "decimals": 2,
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 43
+      },
+      "hiddenSeries": false,
+      "id": 14,
+      "isNew": true,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.1.2",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum by (name) (rate(container_network_transmit_bytes_total{name=~\"$application\", image!=\"\"}[1m]))",
+          "interval": "",
+          "intervalFactor": 10,
+          "legendFormat": "{{ name }}",
+          "metric": "container_network_transmit_bytes_total",
+          "refId": "A",
+          "step": 10
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Container Network Output",
+      "tooltip": {
+        "msResolution": true,
+        "shared": true,
+        "sort": 2,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
-  "refresh": "30s",
+  "refresh": "10s",
   "schemaVersion": 30,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "docker"
+  ],
   "templating": {
     "list": [
       {
-        "allValue": null,
+        "allValue": "",
         "current": {
           "selected": false,
-          "text": "api-gateway",
-          "value": "api-gateway"
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "Prometheus",
         "definition": "label_values(application)",
         "description": null,
         "error": null,
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Application",
         "multi": false,
         "name": "application",
@@ -1044,38 +1231,11 @@
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "api-gateway:8080",
-          "value": "api-gateway:8080"
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(jvm_memory_used_bytes{application=\"$application\"}, instance)",
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": "Instance",
-        "multi": false,
-        "name": "instance",
-        "options": [],
-        "query": {
-          "query": "label_values(jvm_memory_used_bytes{application=\"$application\"}, instance)",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 2,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -1103,8 +1263,8 @@
       "30d"
     ]
   },
-  "timezone": "",
-  "title": "System Metrics (Micrometer)",
-  "uid": "skfGrta43Ae2",
-  "version": 8
+  "timezone": "browser",
+  "title": "System Metrics (Node Exporter)",
+  "uid": "qV-djSHnk",
+  "version": 3
 }
