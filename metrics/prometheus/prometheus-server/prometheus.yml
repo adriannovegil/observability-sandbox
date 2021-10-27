@@ -33,22 +33,51 @@ scrape_configs:
       - targets: ['cadvisor:8080']
 
   # Spring petclinic services monitoring
-  - job_name: api-gateway
+  # You can use Eureka's application instance metadata.
+  # If you are using SpringBoot, you can add metadata using eureka.instance.metadataMap like this:
+  # application.yaml (spring-boot)
+  # eureka:
+  #  instance:
+  #    metadataMap:
+  #      "prometheus.scrape": "true"
+  #      "prometheus.path": "/actuator/prometheus"
+  - job_name: eureka-discovery
     metrics_path: /actuator/prometheus
-    static_configs:
-    - targets: ['api-gateway:8080']
+    scrape_interval: 15s
+    scrape_timeout: 15s
+    eureka_sd_configs:
+    - server: http://discovery-server:8761/eureka
+      refresh_interval: 30s
+    relabel_configs:
+    # Relabel to customize metric path based on application
+    # "prometheus.path = <metric path>" annotation.
+    - source_labels: [__address__, __meta_eureka_app_instance_metadata_prometheus_port]
+      action: replace
+      regex: ([^:]+)(?::\d+)?;(\d+)
+      replacement: $1:$2
+      target_label: __address__
+    # Relabel to scrape only application that have
+    # "prometheus.scrape = true" metadata.
+    - source_labels: [__meta_eureka_app_instance_metadata_prometheus_scrape]
+      action: keep
+      regex: true
 
-  - job_name: customers-service
-    metrics_path: /actuator/prometheus
-    static_configs:
-    - targets: ['customers-service:8081']
+  #- job_name: api-gateway
+  #  metrics_path: /actuator/prometheus
+  #  static_configs:
+  #  - targets: ['api-gateway:8080']
 
-  - job_name: visits-service
-    metrics_path: /actuator/prometheus
-    static_configs:
-    - targets: ['visits-service:8082']
+  #- job_name: customers-service
+  #  metrics_path: /actuator/prometheus
+  #  static_configs:
+  #  - targets: ['customers-service:8081']
 
-  - job_name: vets-service
-    metrics_path: /actuator/prometheus
-    static_configs:
-    - targets: ['vets-service:8083']
+  #- job_name: visits-service
+  #  metrics_path: /actuator/prometheus
+  #  static_configs:
+  #  - targets: ['visits-service:8082']
+
+  #- job_name: vets-service
+  #  metrics_path: /actuator/prometheus
+  #  static_configs:
+  #  - targets: ['vets-service:8083']
