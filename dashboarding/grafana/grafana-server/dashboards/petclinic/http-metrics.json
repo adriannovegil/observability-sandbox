@@ -23,7 +23,7 @@
   "gnetId": 14430,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1635341971496,
+  "iteration": 1635372905467,
   "links": [],
   "panels": [
     {
@@ -1705,7 +1705,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "api-gateway",
           "value": "api-gateway"
         },
@@ -1736,8 +1736,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "api-gateway:8080",
-          "value": "api-gateway:8080"
+          "text": "eff02a66ded6:api-gateway:8080",
+          "value": "eff02a66ded6:api-gateway:8080"
         },
         "datasource": "Prometheus",
         "definition": "label_values(jvm_memory_used_bytes{application=\"$application\"}, instance)",
@@ -1753,7 +1753,7 @@
           "query": "label_values(jvm_memory_used_bytes{application=\"$application\"}, instance)",
           "refId": "StandardVariableQuery"
         },
-        "refresh": 1,
+        "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
@@ -1822,5 +1822,5 @@
   "timezone": "",
   "title": "HTTP Metrics (Micrometer)",
   "uid": "nDQg_jOnk2",
-  "version": 1
+  "version": 4
 }

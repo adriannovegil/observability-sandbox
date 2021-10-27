@@ -37,7 +37,7 @@
   "gnetId": 4701,
   "graphTooltip": 1,
   "id": 9,
-  "iteration": 1635174516793,
+  "iteration": 1635372906628,
   "links": [],
   "panels": [
     {
@@ -3052,9 +3052,9 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "visits-service",
-          "value": "visits-service"
+          "selected": true,
+          "text": "customers-service",
+          "value": "customers-service"
         },
         "datasource": "Prometheus",
         "definition": "",
@@ -3070,10 +3070,10 @@
           "query": "label_values(application)",
           "refId": "Prometheus-application-Variable-Query"
         },
-        "refresh": 2,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 1,
         "tagValuesQuery": "",
         "tagsQuery": "",
         "type": "query",
@@ -3084,11 +3084,11 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "visits-service:8082",
-          "value": "visits-service:8082"
+          "text": "54a33c9f66ff:customers-service:8081",
+          "value": "54a33c9f66ff:customers-service:8081"
         },
         "datasource": "Prometheus",
-        "definition": "",
+        "definition": "label_values(jvm_memory_used_bytes{application=\"$application\"}, instance)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -3100,12 +3100,12 @@
         "options": [],
         "query": {
           "query": "label_values(jvm_memory_used_bytes{application=\"$application\"}, instance)",
-          "refId": "Prometheus-instance-Variable-Query"
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 1,
         "tagValuesQuery": "",
         "tagsQuery": "",
         "type": "query",
@@ -3210,5 +3210,5 @@
   "timezone": "browser",
   "title": "JVM Metrics (Micrometer)",
   "uid": "vxVTxPd7z",
-  "version": 1
+  "version": 4
 }

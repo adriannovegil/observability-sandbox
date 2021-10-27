@@ -23,7 +23,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": 3,
-  "iteration": 1635340388509,
+  "iteration": 1635373325759,
   "links": [],
   "panels": [
     {
@@ -165,7 +165,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum by (name) (rate(container_cpu_usage_seconds_total{name=~\"$application\", image!=\"\"}[1m])) / scalar(count(node_cpu_seconds_total{mode=\"user\"})) * 100",
+          "expr": "sum by (name) (rate(container_cpu_usage_seconds_total{image!=\"\"}[1m])) / scalar(count(node_cpu_seconds_total{mode=\"user\"})) * 100",
           "interval": "",
           "intervalFactor": 10,
           "legendFormat": "{{ name }}",
@@ -441,7 +441,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum by (name)(container_memory_usage_bytes{name=~\"$application\", image!=\"\"})",
+          "expr": "sum by (name)(container_memory_usage_bytes{image!=\"\"})",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{ name }}",
@@ -624,7 +624,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum by (name) (container_memory_cache{name=~\"$application\", image!=\"\"})",
+          "expr": "sum by (name) (container_memory_cache{image!=\"\"})",
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{name}}",
@@ -1043,7 +1043,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum by (name) (rate(container_network_receive_bytes_total{name=~\"$application\", image!=\"\"}[1m]))",
+          "expr": "sum by (name) (rate(container_network_receive_bytes_total{image!=\"\"}[1m]))",
           "interval": "",
           "intervalFactor": 10,
           "legendFormat": "{{ name }}",
@@ -1145,7 +1145,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum by (name) (rate(container_network_transmit_bytes_total{name=~\"$application\", image!=\"\"}[1m]))",
+          "expr": "sum by (name) (rate(container_network_transmit_bytes_total{image!=\"\"}[1m]))",
           "interval": "",
           "intervalFactor": 10,
           "legendFormat": "{{ name }}",
@@ -1204,35 +1204,7 @@
     "docker"
   ],
   "templating": {
-    "list": [
-      {
-        "allValue": "",
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(application)",
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": "Application",
-        "multi": false,
-        "name": "application",
-        "options": [],
-        "query": {
-          "query": "label_values(application)",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 2,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      }
-    ]
+    "list": []
   },
   "time": {
     "from": "now-15m",
@@ -1266,5 +1238,5 @@
   "timezone": "browser",
   "title": "System Metrics (Node Exporter)",
   "uid": "qV-djSHnk",
-  "version": 3
+  "version": 6
 }
