@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # Zipkin Server
+  zipkin:
+    image: openzipkin/zipkin    
+    ports:
+      - 9411:9411
+    networks:
+      - observabilitysandbox
+    restart: always
+    labels:
+      org.label-schema.group: "observability"
+
+networks:
+  observabilitysandbox:
+    name: observabilitysandbox
+    external: true

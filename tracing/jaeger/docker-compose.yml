@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  # Jaeger Server
+  jaeger:
+    image: jaegertracing/all-in-one:1.25.0
+    ports:
+      - 16686:16686
+      - 14269:14269
+    networks:
+      - observabilitysandbox
+    restart: always
+    labels:
+      org.label-schema.group: "observability"
+
+networks:
+  observabilitysandbox:
+    name: observabilitysandbox
+    external: true

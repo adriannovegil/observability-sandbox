@@ -48,11 +48,21 @@ build: ## Build the Docker images
 	. ./env.sh; \
 	$(COMPOSE_COMMAND) $${ALL_COMPOSE_FILES} build
 
-up: create-network ## Start all or c=<name> containers in foreground
+up-metrics: create-network ## Start all or c=<name> containers for metrics in foreground
 	. ./env.sh; \
 	$(COMPOSE_COMMAND) -f $${GRAFANA} up -d; \
 	$(COMPOSE_COMMAND) -f $${PROMETHEUS} up -d; \
 	$(COMPOSE_COMMAND) -f $${SELF_METRICS} up -d
+
+up: up-metrics ## Alias of up-metrics
+
+up-zipkin: create-network ## Start all or c=<name> containers to start zipkin in foreground
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) -f $${ZIPKIN} up -d; \
+
+up-jaeger: create-network ## Start all or c=<name> containers to start jaeger in foreground
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) -f $${JAEGER} up -d; \
 
 start: create-network ## Start all or c=<name> containers in background
 	@$(COMPOSE_COMMAND) up -d
@@ -60,6 +70,14 @@ start: create-network ## Start all or c=<name> containers in background
 stop: ## Stop all or c=<name> containers
 	. ./env.sh; \
 	$(COMPOSE_COMMAND) $${ALL_COMPOSE_FILES} stop
+
+stop-zipkin: ## Stop the Zipkin containers
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) -f $${ZIPKIN} stop
+
+stop-jaeger: ## Stop the Jaeger containers
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) -f $${JAEGER} stop
 
 restart: stop start ## Restart all or c=<name> containers
 
