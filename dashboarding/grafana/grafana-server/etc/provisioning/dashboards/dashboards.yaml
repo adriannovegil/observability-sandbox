@@ -24,10 +24,32 @@ providers:
     allowUiUpdates: true
     options:
       path: /var/lib/grafana/dashboards/prometheus
+  - name: 'Zipkin'
+    orgId: 1
+    folder: 'Self Monitoring'
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/zipkin
+  - name: 'Jaeger'
+    orgId: 1
+    folder: 'Self Monitoring'
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/jaeger
   # Spring Petclinic Application Dashboards
   - name: 'Spring Petclinic'
     orgId: 1
-    folder: 'Petclinic'
+    folder: 'Spring Petclinic'
     folderUid: ''
     type: file
     disableDeletion: true
