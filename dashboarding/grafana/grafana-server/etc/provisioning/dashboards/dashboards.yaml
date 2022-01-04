@@ -58,3 +58,39 @@ providers:
     allowUiUpdates: true
     options:
       path: /var/lib/grafana/dashboards/petclinic
+  # OpenCMS sandbox
+  - name: 'OpenCMS Sandbox'
+    orgId: 1
+    folder: 'Sandbox - OpenCMS'
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/opencms
+  # Apache Solr sandbox
+  - name: 'Apache Solr Sandbox'
+    orgId: 1
+    folder: 'Sandbox - Apache Solr'
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/solr
+  # Apache Solr sandbox - GECO+
+  - name: 'Apache Solr Sandbox - GECO+'
+    orgId: 1
+    folder: 'Sandbox - Apache Solr - GECO+'
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/solr-geco
