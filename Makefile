@@ -1,6 +1,6 @@
 #
 # Makefile to manage the containers.
-# Author: Adrian Novegil <adrian.novegiltoledo@altran.com>
+# Author: Adrian Novegil <adrian.novegil@gmail.com>
 #
 #COLORS
 GREEN  := $(shell tput -Txterm setaf 2)
