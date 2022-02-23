@@ -24,29 +24,37 @@ The following services will be started. Some of them are accessible via web:
 
 ### Dashboarding
 
-| Component                                  | Description                                                  | Port      |
-| ---------------------------------------    | ---------------------------------------------------------    | -------------------------------    |
-| `grafana-server`                           | [Grafana](https://grafana.com/)                              | [`3000`](http://localhost:3000)    |
+| Component                                  | Description                                                  | Port                              |
+| ---------------------------------------    | ---------------------------------------------------------    | --------------------------------- |
+| `grafana-server`                           | [Grafana](https://grafana.com/)                              | [`3000`](http://localhost:3000)   |
 
 ### Storage
 
-| Component                                  | Description                                                  | Port                               |
-| ---------------------------------------    | ---------------------------------------------------------    | -------------------------------    |
-| `prometheus-server`                        | [Prometheus](https://prometheus.io/)                         | [`9090`](http://localhost:9090)    |
+| Component                                  | Description                                                  | Port                              |
+| ---------------------------------------    | ---------------------------------------------------------    | --------------------------------- |
+| `prometheus-server`                        | [Prometheus](https://prometheus.io/)                         | [`9090`](http://localhost:9090)   |
 
 ### Tracing
 
-| Component                                  | Description                                                  | Port                               |
-| ---------------------------------------    | ---------------------------------------------------------    | --------------------------------   |
-| `zipking`                                  | [Zipkin](https://zipkin.io/)                                 | [`9411`](http://localhost:9411)    |
-| `jaeger`                                   | [Jaeger](https://www.jaegertracing.io/)                      | [`16686`](http://localhost:16686)  |
+| Component                                  | Description                                                  | Port                              |
+| ---------------------------------------    | ---------------------------------------------------------    | --------------------------------- |
+| `zipking`                                  | [Zipkin](https://zipkin.io/)                                 | [`9411`](http://localhost:9411)   |
+| `jaeger`                                   | [Jaeger](https://www.jaegertracing.io/)                      | [`16686`](http://localhost:16686) |
+
+### Logs
+
+| Component                                  | Description                                                  | Port                             |
+| ---------------------------------------    | ---------------------------------------------------------    | -------------------------------- |
+| `Elasticsearch`                            | [Elasticsearch](https://www.elastic.co/)                     | [`9200`](http://localhost:9200)  |
+| `Logstash`                                 | [Logstash](https://www.elastic.co/)                          | [`9600`](http://localhost:9600)  |
+| `Kibana`                                   | [Kibana](https://www.elastic.co/)                            | [`5601`](http://localhost:5601)  |
 
 ### Self Monitoring
 
-| Component                                  | Description                                                  | Port                               |
-| ---------------------------------------    | ---------------------------------------------------------    | --------------------------------   |
-| `cadvisor`                                 | [cAdvisor](https://github.com/google/cadvisor)               | [`8010`](http://localhost:8010)    |
-| `node-exporter`                            | [Node Exporter](https://github.com/prometheus/node_exporter) | [`9100`](http://localhost:9100)    |
+| Component                                  | Description                                                  | Port                             |
+| ---------------------------------------    | ---------------------------------------------------------    | -------------------------------- |
+| `cadvisor`                                 | [cAdvisor](https://github.com/google/cadvisor)               | [`8010`](http://localhost:8010)  |
+| `node-exporter`                            | [Node Exporter](https://github.com/prometheus/node_exporter) | [`9100`](http://localhost:9100)  |
 
 ## Configuration
 

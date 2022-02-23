@@ -64,6 +64,10 @@ up-jaeger: create-network ## Start all or c=<name> containers to start jaeger in
 	. ./env.sh; \
 	$(COMPOSE_COMMAND) -f $${JAEGER} up -d; \
 
+up-elk: create-network ## Start all or c=<name> containers to start ELK stack in foreground
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) -f $${ELK} up -d; \
+
 start: create-network ## Start all or c=<name> containers in background
 	@$(COMPOSE_COMMAND) up -d
 
@@ -79,6 +83,10 @@ stop-jaeger: ## Stop the Jaeger containers
 	. ./env.sh; \
 	$(COMPOSE_COMMAND) -f $${JAEGER} stop
 
+stop-elk: ## Stop the ELK containers
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) -f $${ELK} stop
+
 restart: stop start ## Restart all or c=<name> containers
 
 logs: ## Show logs for all or c=<name> containers
@@ -89,10 +97,22 @@ status: ## Show status of containers
 	. ./env.sh; \
 	$(COMPOSE_COMMAND) $${ALL_COMPOSE_FILES} ps
 
-ps: status ## Alias of status
-
 down: confirm ## Clean all data
 	. ./env.sh; \
 	$(COMPOSE_COMMAND) $${ALL_COMPOSE_FILES} down
+
+down-zipkin: confirm ## Clean all zipkin data
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) -f $${ZIPKIN} down
+
+down-jaeger: confirm ## Clean all jaeger data
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) -f $${JAEGER} down
+
+down-elk: confirm ## Clean all ELK data
+	. ./env.sh; \
+	$(COMPOSE_COMMAND) -f $${ELK} down
+
+ps: status ## Alias of status
 
 clean: down ## Alias of down
