@@ -3,11 +3,14 @@ version: '3.8'
 services:
   # Grafana
   grafana-server:
-    image: grafana/grafana:8.1.2
+    image: grafana/grafana:9.2.15
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_USERS_ALLOW_SIGN_UP=false
+      #- GF_AUTH_DISABLE_LOGIN_FORM=true
+      #- GF_AUTH_ANONYMOUS_ENABLED=true
+      #- GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_INSTALL_PLUGINS=grafana-piechart-panel
     volumes:
       - ./grafana-server/etc:/etc/grafana:ro
@@ -28,6 +31,6 @@ volumes:
     external: false
 
 networks:
-  observabilitysandbox:
+  observabilitysandbox:    
     name: observabilitysandbox
     external: true
