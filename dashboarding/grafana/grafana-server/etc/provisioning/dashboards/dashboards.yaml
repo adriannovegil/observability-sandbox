@@ -58,6 +58,18 @@ providers:
     allowUiUpdates: true
     options:
       path: /var/lib/grafana/dashboards/petclinic
+  # CQRS Sandbox Application Dashboards
+  - name: 'CQRS Sandbox'
+    orgId: 1
+    folder: 'CQRS Sandbox'
+    folderUid: ''
+    type: file
+    disableDeletion: true
+    editable: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards/cqrs-sandbox
   # OpenCMS sandbox
   - name: 'OpenCMS Sandbox'
     orgId: 1

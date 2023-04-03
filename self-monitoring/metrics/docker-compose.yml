@@ -42,6 +42,6 @@ services:
       org.label-schema.group: "observability"
 
 networks:
-  observabilitysandbox:
+  observabilitysandbox:    
     name: observabilitysandbox
     external: true
