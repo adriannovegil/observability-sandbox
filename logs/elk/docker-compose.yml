@@ -46,7 +46,7 @@ services:
     depends_on:
       - elasticsearch
     ports:
-      - 5044:5400
+      - 5044:5044
       - 9600:9600
     networks:
       - observabilitysandbox
@@ -78,6 +78,6 @@ volumes:
   elasticsearch:
 
 networks:
-  observabilitysandbox:
+  observabilitysandbox:    
     name: observabilitysandbox
     external: true
