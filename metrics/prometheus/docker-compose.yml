@@ -3,9 +3,10 @@ version: '3.8'
 services:
   # Prometheus Server
   prometheus-server:
-    image: prom/prometheus:v2.29.2
+    image: prom/prometheus:v2.43.0
     volumes:
       - ./prometheus-server/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./certificates/:/etc/certificates/
       - prometheusserver_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -26,6 +27,6 @@ volumes:
   prometheusserver_data: {}
 
 networks:
-  observabilitysandbox:
+  observabilitysandbox:    
     name: observabilitysandbox
     external: true
